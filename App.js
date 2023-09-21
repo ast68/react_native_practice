@@ -53,7 +53,7 @@ function App(){
         name: 'gohan', age: 53
       },
       {
-        name: 'luffy', age: 22
+        name: 'luffy', age: 21
       },
       {
         name: 'zoro', age: 26
@@ -70,8 +70,6 @@ function App(){
   const {name , person, listData} = state;
 
   const pressHandler = (id) => {
-    console.log('press handler age => ' , id)
-
     setState((prev) => ({...prev , listData: prev.listData.filter(person => person.age != id)
     }))
   }
@@ -88,6 +86,7 @@ function App(){
       <FlatList
         // numColumns={2}
         keyExtractor={(item) => item.age}
+        showsVerticalScrollIndicator={false}
         data={listData}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => pressHandler(item.age)}>
