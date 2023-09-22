@@ -7,67 +7,21 @@
 
 import React, { useState } from 'react';
 import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, useColorScheme } from 'react-native';
+import { Header } from './components';
 
 
 function App(){
   const isDarkMode = useColorScheme() === 'dark';
 
   const [state , setState] = useState({
-    name : "Ayush Thunder14",
-    person : {
-      name : "chun-li",
-      age : 35,
-    },
     listData: [
-      {
-        name: 'chun-li', age: 24
-      },
-      {
-        name: 'luigi', age: 28
-      },
-      {
-        name: 'shadow', age: 22
-      },
-      {
-        name: 'matter', age: 30
-      },
-      {
-        name: 'sara', age: 29
-      },
-      {
-        name: 'brad', age: 33
-      },
-      {
-        name: 'chelse', age: 32
-      },
-      {
-        name: 'ron', age: 38
-      },
-      {
-        name: 'ayush', age: 25
-      },
-      {
-        name: 'goku', age: 34
-      },
-      {
-        name: 'gohan', age: 53
-      },
-      {
-        name: 'luffy', age: 21
-      },
-      {
-        name: 'zoro', age: 26
-      },
-      {
-        name: 'itachi', age: 27
-      },
-      {
-        name: 'sasuke', age: 37
-      },
+      { item: 'buy milk', id: 1 },
+      { item: 'go to a hair saloon', id: 2 },
+      { item: 'buy some chocolates', id: 3 },
     ]
   })
 
-  const {name , person, listData} = state;
+  const {listData} = state;
 
   const pressHandler = (id) => {
     setState((prev) => ({...prev , listData: prev.listData.filter(person => person.age != id)
@@ -76,35 +30,29 @@ function App(){
 
   return (
     <View style={styles.sectionContainer}>
-      {/* <ScrollView>
-        {listData.map((item, index) => (
-          <View key={index}>
-            <Text  style={styles.listText}>{item.name} is of Age : {item.age}</Text>
-            </View>
-            ))}
-          </ScrollView> */}
-      <FlatList
-        // numColumns={2}
-        keyExtractor={(item) => item.age}
-        showsVerticalScrollIndicator={false}
-        data={listData}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => pressHandler(item.age)}>
-            <Text  style={styles.listText}>{item.name} is of Age : {item.age}</Text>
-          </TouchableOpacity>
-        )}
-      />
+      <Header/>
+      <View style={styles.sectionContainer}>
+          <FlatList
+            data={listData}
+            keyExtractor={(item) => item.id}
+            renderItem={({item}) => (
+              <Text style={styles.listText}>
+                {item.item}
+              </Text>
+            )}
+          />
+      </View>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 20,
+    marginTop: 0,
     marginHorizontal: 0,
-    paddingHorizontal: 5,
-    display: "flex",
-    alignItems: "center",
+    paddingHorizontal: 0,
+    flex: 1,
   },
 
   listText: {
