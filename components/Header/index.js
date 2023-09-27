@@ -1,34 +1,38 @@
-import React from 'react'
-import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
- function Header() {
+function Header(props) {
+
+  const {title} = props;
+
   return (
     <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>
-            My Todos
-        </Text>
+      <Text style={styles.headerText}>{title}</Text>
     </View>
-
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-
-headerContainer:{
+  headerContainer: {
     backgroundColor: '#000',
     opacity: 0.85,
     color: '#fff',
     height: 60,
   },
-  
-  headerText:{
-    color: "#fff",
-    fontWeight: 600,
+
+  headerText: {
+    color: '#fff',
+    fontWeight: '700',
     fontSize: 17,
     textAlign: 'center',
     padding: 15,
-}
+  },
 });
-
 
 export default Header;
