@@ -10,11 +10,13 @@ import {
   Alert,
   Button,
   FlatList,
+  Keyboard,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
   useColorScheme,
 } from 'react-native';
@@ -57,30 +59,34 @@ function App() {
   };
 
   return (
-    <View style={styles.sectionContainer}>
-      <Header title={'My Todos'} />
-      <View style={styles.content}>
-        <AddTodoForm submitHandler={submitHandler} />
-        <View style={listData.length != 0 ? null : styles.list}>
-          {listData.length != 0 ? (
-            <FlatList
-              data={listData}
-              keyExtractor={item => item.id}
-              renderItem={({item}) => (
-                <CustomText
-                  title={item.item}
-                  data={item}
-                  textStyles={styles.listText}
-                  pressTextHandler={pressHandler}
-                />
-              )}
-            />
-          ) : (
-            <Text style={styles.emptyListText}>{'No Todos For Today...'}</Text>
-          )}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.sectionContainer}>
+        <Header title={'My Todos'} />
+        <View style={styles.content}>
+          <AddTodoForm submitHandler={submitHandler} />
+          <View style={listData.length != 0 ? null : styles.list}>
+            {listData.length != 0 ? (
+              <FlatList
+                data={listData}
+                keyExtractor={item => item.id}
+                renderItem={({item}) => (
+                  <CustomText
+                    title={item.item}
+                    data={item}
+                    textStyles={styles.listText}
+                    pressTextHandler={pressHandler}
+                  />
+                )}
+              />
+            ) : (
+              <Text style={styles.emptyListText}>
+                {'No Todos For Today...'}
+              </Text>
+            )}
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   list: {
-    display: 'flex',
+    flex: 1,
     alignItems: 'center',
     marginVertical: 30,
   },
