@@ -74,6 +74,7 @@ function App() {
                     title={item.item}
                     data={item}
                     textStyles={styles.listText}
+                    icon={true}
                     pressTextHandler={pressHandler}
                   />
                 )}
@@ -103,9 +104,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 20,
     backgroundColor: 'green',
-    color: '#fff',
-    fontWeight: 700,
-    fontSize: 24,
   },
 
   list: {
