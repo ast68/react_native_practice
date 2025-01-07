@@ -7,12 +7,14 @@ function CustomText(props) {
   const {data, title, textStyles, pressTextHandler, icon} = props;
   return (
     <View>
-      <TouchableOpacity
-        onPress={() => pressTextHandler(data.id)}
-        style={{...CustomTextstyles.TextStyle, ...textStyles}}>
+      <View style={{...CustomTextstyles.TextStyle, ...textStyles}}>
         <Text style={{...CustomTextstyles.Content}}>{title}</Text>
-        {icon ? <Icon name="delete" size={30} color="#900" /> : null}
-      </TouchableOpacity>
+        {icon ? (
+          <TouchableOpacity onPress={() => pressTextHandler(data.id)}>
+            <Icon name="delete" size={30} color="#900" />
+          </TouchableOpacity>
+        ) : null}
+      </View>
     </View>
   );
 }
