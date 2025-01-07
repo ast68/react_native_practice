@@ -8,21 +8,16 @@ import {
 } from 'react-native';
 
 function AddTodoForm(props) {
-  const {submitHandler} = props;
-
-  const [state, setState] = useState({
-    inputText: '',
-  });
-
-  const {inputText} = state;
-
-  const changeHandler = val => {
-    setState(prev => ({...prev, inputText: val}));
-  };
+  const {submitHandler, inputText, changeHandler} = props;
 
   return (
     <View style={styles.formContianer}>
-      <TextInput placeholder="New Todos..." onChangeText={changeHandler} />
+      <TextInput
+        placeholder="New Todos..."
+        value={inputText}
+        onChangeText={changeHandler}
+        onSubmitEditing={() => submitHandler(inputText)}
+      />
 
       <TouchableOpacity
         style={styles.buttonContainer}
@@ -44,7 +39,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   buttonTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 600,
     color: '#fff',
     textAlign: 'center',

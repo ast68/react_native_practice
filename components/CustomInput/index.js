@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {TextInput} from 'react-native';
 import customInputStyles from './customInputStyles';
 

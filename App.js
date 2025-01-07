@@ -8,19 +8,15 @@
 import React, {useState} from 'react';
 import {
   Alert,
-  Button,
   FlatList,
   Keyboard,
-  ScrollView,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
   useColorScheme,
 } from 'react-native';
-import {CustomButton, CustomInput, CustomText, Header} from './components';
+import {CustomText, Header} from './components';
 import {AddTodoForm} from './views';
 
 function App() {
@@ -28,15 +24,19 @@ function App() {
 
   const [state, setState] = useState({
     listData: [],
+    inputText: '',
   });
 
-  const {listData} = state;
+  const {listData, inputText} = state;
 
   const pressHandler = id => {
     setState(prev => ({
       ...prev,
       listData: prev.listData.filter(item => item.id != id),
     }));
+  };
+  const changeHandler = val => {
+    setState(prev => ({...prev, inputText: val}));
   };
 
   const submitHandler = text => {
@@ -46,10 +46,11 @@ function App() {
         listData: [
           {
             item: text,
-            id: Math.random().toFixed(2).toString(),
+            id: (Math.floor(Math.random() * (999 - 100 + 1)) + 100).toString(),
           },
           ...prev.listData,
         ],
+        inputText: '',
       }));
     } else {
       Alert.alert('ERROR!', 'Todos must be 3 chars long', [
@@ -63,7 +64,11 @@ function App() {
       <View style={styles.sectionContainer}>
         <Header title={'My Todos'} />
         <View style={styles.content}>
-          <AddTodoForm submitHandler={submitHandler} />
+          <AddTodoForm
+            submitHandler={submitHandler}
+            changeHandler={changeHandler}
+            inputText={inputText}
+          />
           <View style={listData.length != 0 ? null : styles.list}>
             {listData.length != 0 ? (
               <FlatList
@@ -74,6 +79,7 @@ function App() {
                     title={item.item}
                     data={item}
                     textStyles={styles.listText}
+                    icon={true}
                     pressTextHandler={pressHandler}
                   />
                 )}
@@ -103,9 +109,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 20,
     backgroundColor: 'green',
-    color: '#fff',
-    fontWeight: 700,
-    fontSize: 24,
   },
 
   list: {

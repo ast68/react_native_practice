@@ -5,6 +5,14 @@ const CustomTextstyles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderStyle: 'dashed',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  Content: {
+    color: '#fff',
+    fontWeight: 700,
+    fontSize: 24,
   },
 });
 

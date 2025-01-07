@@ -1,15 +1,21 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import CustomTextstyles from './textStyles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function CustomText(props) {
-  const {data, title, textStyles, pressTextHandler} = props;
+  const {data, title, textStyles, pressTextHandler, icon} = props;
   return (
-    <TouchableOpacity onPress={() => pressTextHandler(data.id)}>
-      <Text style={{...CustomTextstyles.TextStyle, ...textStyles}}>
-        {title}
-      </Text>
-    </TouchableOpacity>
+    <View>
+      <View style={{...CustomTextstyles.TextStyle, ...textStyles}}>
+        <Text style={{...CustomTextstyles.Content}}>{title}</Text>
+        {icon ? (
+          <TouchableOpacity onPress={() => pressTextHandler(data.id)}>
+            <Icon name="delete" size={30} color="#900" />
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    </View>
   );
 }
 
